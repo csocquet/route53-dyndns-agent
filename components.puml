@@ -1,0 +1,8 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+package core {
+     Resolver <. [Agent] : use
+    [Agent] .> Handler : use
+}
+@enduml
