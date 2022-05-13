@@ -2,7 +2,14 @@
 'https://plantuml.com/component-diagram
 
 package core {
-     Resolver <. [Agent] : use
-    [Agent] .> Handler : use
+    component Agent
+    interface Resolver
+    interface Handler
+
+    Resolver )- Agent
+    Agent -( Handler
+
+    component http
+    http - Resolver
 }
 @enduml
