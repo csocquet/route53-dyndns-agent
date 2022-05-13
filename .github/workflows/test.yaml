@@ -1,0 +1,30 @@
+name: Go test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest ]
+        go_vers: [ 1.18 ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go_vers }}
+
+      - name: Download dependencies
+        run: go mod download -x
+
+      - name: Test
+        run: go test -v ./...
+
